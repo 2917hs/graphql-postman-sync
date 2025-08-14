@@ -1,0 +1,30 @@
+{
+  "name": "graphql-to-postman",
+  "version": "1.0.0",
+  "description": "// export POSTMAN_API_KEY=\"PMAK-689c922e4464b70001d46fd7-a0b2b1a8139a188e51bfa4beeea4ed1dea\" // npx ts-node import-to-postman.ts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^8.0.22",
+    "@graphql-tools/json-file-loader": "^8.0.20",
+    "@graphql-tools/load": "^8.1.2",
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "graphql": "^16.11.0",
+    "postman-collection": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "@types/postman-collection": "^3.5.11",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  }
+}

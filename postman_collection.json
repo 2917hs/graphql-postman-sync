@@ -1,0 +1,21 @@
+{
+  "info": {
+    "name": "GraphQL Auto-Generated",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "environment",
+      "value": "dev"
+    },
+    {
+      "key": "version",
+      "value": "v1"
+    },
+    {
+      "key": "graphql_url",
+      "value": "https://dev.example.com/graphql"
+    }
+  ],
+  "item": []
+}
