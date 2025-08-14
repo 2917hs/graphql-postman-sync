@@ -1,0 +1,53 @@
+name: Generate Postman Collection
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment config to use (dev or prod)
+        required: false
+        default: dev
+  push:
+    branches: [ main ]
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: ${{ github.event.inputs.environment || 'dev' }}
+    defaults:
+      run:
+        working-directory: graphql-postman-sync
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: graphql-postman-sync/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate collection locally
+        env:
+          LOCAL_ONLY: '1'
+          OUT_FILE: postman_collection.json
+        run: npm start
+
+      - name: Upload collection artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-collection
+          path: graphql-postman-sync/postman_collection.json
+          if-no-files-found: error
+
+      - name: Push collection to Postman (optional)
+        if: ${{ secrets.POSTMAN_API_KEY != '' }}
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+          WORKSPACE_ID: ${{ secrets.WORKSPACE_ID }}
+        run: npm start
