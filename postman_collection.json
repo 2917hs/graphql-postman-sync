@@ -1,8 +1,207 @@
 {
-  "info": {
-    "name": "GraphQL Auto-Generated",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
+  "item": [
+    {
+      "id": "5d2508cf-d4f7-4cfc-926f-2e98c704fcf5",
+      "name": "Queries",
+      "item": [
+        {
+          "id": "a254a7af-53ca-42e6-b522-288f8e5eda19",
+          "name": "QUERY - getUser",
+          "request": {
+            "url": {
+              "host": [
+                "{{graphql_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query getUser($id: ID!) {\\n  getUser(id: $id) {\\n    __typename\\n  }\\n}\",\n  \"variables\": {\n    \"id\": \"123\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "efddc570-5a53-4298-b1ef-3f76131a6eab",
+          "name": "QUERY - listUsers",
+          "request": {
+            "url": {
+              "host": [
+                "{{graphql_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query listUsers {\\n  listUsers {\\n    __typename\\n  }\\n}\",\n  \"variables\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "30befdee-4e33-48f5-a376-35c101551362",
+          "name": "QUERY - getPostsByUser",
+          "request": {
+            "url": {
+              "host": [
+                "{{graphql_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query getPostsByUser($userId: ID!) {\\n  getPostsByUser(userId: $userId) {\\n    __typename\\n  }\\n}\",\n  \"variables\": {\n    \"userId\": \"123\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "46563d2d-ddd5-43d0-8833-c5fb6fc76035",
+      "name": "Mutations",
+      "item": [
+        {
+          "id": "9a6a0013-ae7d-49e9-b80e-5e83b914f7f3",
+          "name": "MUTATION - createUser",
+          "request": {
+            "url": {
+              "host": [
+                "{{graphql_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation createUser($input: CreateUserInput!) {\\n  createUser(input: $input) {\\n    __typename\\n  }\\n}\",\n  \"variables\": {\n    \"input\": \"example\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "d9920d81-c1a9-4356-9701-fb2832906c86",
+          "name": "MUTATION - updateUserName",
+          "request": {
+            "url": {
+              "host": [
+                "{{graphql_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation updateUserName($id: ID!, $name: String!) {\\n  updateUserName(id: $id, name: $name) {\\n    __typename\\n  }\\n}\",\n  \"variables\": {\n    \"id\": \"123\",\n    \"name\": \"example\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
+          "id": "ac21a5c2-076c-4782-97c7-77b342ac489e",
+          "name": "MUTATION - deleteUser",
+          "request": {
+            "url": {
+              "host": [
+                "{{graphql_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation deleteUser($id: ID!) {\\n  deleteUser(id: $id) {\\n    __typename\\n  }\\n}\",\n  \"variables\": {\n    \"id\": \"123\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": []
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
   "variable": [
     {
       "key": "environment",
@@ -17,5 +216,9 @@
       "value": "https://dev.example.com/graphql"
     }
   ],
-  "item": []
+  "info": {
+    "_postman_id": "21618951-aea9-446d-babb-a1a7a0fc4a0a",
+    "name": "appsync-postman-sync",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  }
 }

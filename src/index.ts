@@ -1,9 +1,7 @@
-// src/index.ts
 import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 
-// Install crash handlers BEFORE loading anything else
 process.on("uncaughtException", (err: any) => {
   console.error("❌ UncaughtException:", err?.stack ?? JSON.stringify(err, null, 2));
   process.exit(1);
@@ -20,12 +18,10 @@ function assert(cond: any, msg: string): asserts cond {
 }
 
 async function main() {
-  // Dynamically import everything so handlers are active
   const { loadGraphQLSchema } = await import("./schema/loader.js");
   const { buildPostmanCollection } = await import("./postman/collectionBuilder.js");
   const { importOrUpdateCollection } = await import("./postman/importer.js");
 
-  // Import the right env config (fix the filename typo first!)
   const { default: config } = await import(`./config/${env}.config.ts`);
 
   console.log(`▶️  Environment: ${env}`);
@@ -34,15 +30,12 @@ async function main() {
   assert(config?.schemaPath, "schemaPath is missing in your environment config.");
   assert(process.env.POSTMAN_API_KEY, "Please set POSTMAN_API_KEY (e.g., in .env).");
 
-  // 1) Load schema
   const schema = await loadGraphQLSchema(config.schemaPath);
 
-  // 2) Build collection with schema-derived requests
   const collectionJson: any = buildPostmanCollection(
     schema,
     config.collectionName ?? "GraphQL Auto-Generated"
   );
-  // inject variables
   collectionJson.variable = Object.entries({
     environment: config.environment,
     version: config.version,
@@ -59,7 +52,6 @@ async function main() {
     return;
   }
 
-  // 3) Push to Postman
   await importOrUpdateCollection(collectionJson, {
     apiKey: process.env.POSTMAN_API_KEY!,
     collectionName: config.collectionName ?? "GraphQL Auto-Generated",

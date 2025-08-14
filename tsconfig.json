@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2022",                    // Modern JS output
-    "module": "nodenext",                  // ESM modules
-    "moduleResolution": "nodenext",        // Node-style resolution
-    "strict": true,                         // Enable all strict checks
-    "esModuleInterop": true,               // For default import compatibility
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "isolatedModules": true,                // Required for ts-node ESM
+    "isolatedModules": true,
     "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
@@ -18,11 +18,11 @@
     "noUnusedParameters": true,
     "verbatimModuleSyntax": false,
     "moduleDetection": "force",
-    "types": ["node"],                       // Include Node.js types
+    "types": ["node"],
     "lib": ["esnext"]
   },
   "ts-node": {
-    "esm": true,                             // Run ts-node in ESM mode
+    "esm": true,
     "experimentalSpecifierResolution": "node"
   },
   "include": ["src/**/*.ts"],

@@ -1,15 +1,9 @@
-# --------------------------
-# Sample GraphQL Schema
-# --------------------------
-
-# Enums
 enum Role {
   USER
   ADMIN
   MODERATOR
 }
 
-# Input type for mutations
 input CreateUserInput {
   name: String!
   email: String!
@@ -17,7 +11,6 @@ input CreateUserInput {
   role: Role = USER
 }
 
-# User type
 type User {
   id: ID!
   name: String!
@@ -26,7 +19,6 @@ type User {
   role: Role!
 }
 
-# Post type
 type Post {
   id: ID!
   title: String!
@@ -34,26 +26,14 @@ type Post {
   author: User!
 }
 
-# Query type
 type Query {
-  # Fetch a single user by ID
   getUser(id: ID!): User
-
-  # List all users
   listUsers: [User!]!
-
-  # Fetch posts by user ID
   getPostsByUser(userId: ID!): [Post!]!
 }
 
-# Mutation type
 type Mutation {
-  # Create a new user
   createUser(input: CreateUserInput!): User
-
-  # Update user name
   updateUserName(id: ID!, name: String!): User
-
-  # Delete user by ID
   deleteUser(id: ID!): Boolean
 }

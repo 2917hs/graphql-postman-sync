@@ -1,9 +1,5 @@
 import type { GraphQLField, GraphQLArgument } from "graphql";
 import { guessPlaceholderValue } from "./placeholder.js";
-
-/**
- * Build a Postman request object for GraphQL query/mutation
- */
 export function makePostmanRequest(
   name: string,
   type: "query" | "mutation",
@@ -19,10 +15,10 @@ export function makePostmanRequest(
   const selectionSet = "{\n    __typename\n  }";
   const queryString = `${type} ${name}${variableDefinitions} {\n  ${name}${argUsage} ${selectionSet}\n}`;
 
-  const variables: Record<string, any> = {};
-  args.forEach((a: GraphQLArgument) => {
-    variables[a.name] = guessPlaceholderValue(a.type.toString());
-  });
+  const variables: Record<string, any> = args.reduce((acc: Record<string, any>, a: GraphQLArgument) => {
+    acc[a.name] = guessPlaceholderValue(a.type.toString());
+    return acc;
+  }, {});
 
   return {
     name: `${type.toUpperCase()} - ${name}`,

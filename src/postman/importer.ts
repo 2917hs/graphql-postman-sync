@@ -1,4 +1,3 @@
-// src/postman/importer.ts
 import axios from "axios";
 
 type ImportOpts = {
@@ -22,8 +21,7 @@ export async function importOrUpdateCollection(
     headers: { "X-Api-Key": apiKey }
   });
 
-  async function ensureWorkspace(client: any, providedId: string | undefined, desiredName: string) {
-    // If an ID is provided, verify accessibility
+  async function ensureWorkspace(client: import("axios").AxiosInstance, providedId: string | undefined, desiredName: string) {
     if (providedId) {
       try {
         const resp = await client.get(`/workspaces/${providedId}`);
@@ -42,7 +40,6 @@ export async function importOrUpdateCollection(
       }
     }
 
-    // Look for an existing workspace by name
     try {
       const list = await client.get(`/workspaces`);
       const all = list?.data?.workspaces ?? [];
@@ -52,10 +49,8 @@ export async function importOrUpdateCollection(
         return existing.id;
       }
     } catch (err: any) {
-      // Non-fatal; fall through to creation
     }
 
-    // Create a new personal workspace
     try {
       const createResp = await client.post(`/workspaces`, {
         workspace: { name: desiredName, type: "personal" }
@@ -83,11 +78,9 @@ export async function importOrUpdateCollection(
   }
 
   try {
-    // Determine target workspace: prefer provided; otherwise ensure or create a default one
     const desiredWorkspaceName = `${collectionName} Workspace`;
     const targetWorkspaceId = await ensureWorkspace(client, workspaceId, desiredWorkspaceName);
 
-    // list existing collections (retry without workspace if forbidden)
     let listResp;
     try {
       listResp = await client.get(`/collections${workspaceQueryForId(targetWorkspaceId)}`);
@@ -104,7 +97,6 @@ export async function importOrUpdateCollection(
     const collections = listResp.data?.collections ?? [];
     const existing = collections.find((c: any) => c.name === collectionName);
 
-    // enforce minimal valid info
     const payload = {
       collection: {
         ...(collectionJson ?? {}),
@@ -122,7 +114,6 @@ export async function importOrUpdateCollection(
       console.log(`✅ Collection updated: ${updated?.name ?? collectionName}`);
       console.log(`🔗 https://go.postman.co/collections/${updated?.uid}`);
     } else {
-      // try create (retry without workspace if forbidden)
       let createResp;
       try {
         createResp = await client.post(`/collections${workspaceQueryForId(targetWorkspaceId)}`, payload);
